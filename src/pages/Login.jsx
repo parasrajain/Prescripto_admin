@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets_admin/assets";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const [state, setState] = useState("Admin");
@@ -14,23 +15,23 @@ const Login = () => {
         event.preventDefault();
         try {
             if (state === "Admin") {
-                if(backendUrl)
-                {
-                    console.log('found')
-                }
-                console.log("url", backendUrl);
-
                 const { data } = await axios.post('http://localhost:4000/api/admin/login', {
                     email,
                     password,
                 });
+
+
                 console.log('data',data)
 
                 if (data.success) {
                     console.log(data.token);
-                } else {
-                    console.log("notoken found");
-                }
+                    localStorage.setItem('aToken',data.token)
+                    setAToken(data.token)
+                 } 
+                else
+                 {
+                    toast.error(data.message)
+                 }
             } 
             else {
 
