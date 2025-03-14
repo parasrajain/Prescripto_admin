@@ -13,7 +13,7 @@ export default defineConfig({
     port: process.env.PORT || 5174,
     strictPort: true,
     cors: true,  // Enable CORS
-    // allowedHosts: ['prescripto-frontend-7-8coi.onrender.com'],
+    allowedHosts: ['prescripto-admin-1-35dq.onrender.com'],
     proxy: {
       '/api': {
         target: 'https://prescripto-backend-3.onrender.com',  // Change this to your backend URL
